@@ -31,21 +31,6 @@ Each stage has error handling with graceful fallbacks — a blocked fetch or a m
 - **Streamlit** — interactive front-end
 - **Hugging Face Spaces** — deployment
 
-## Project Structure
-
-multi-mind/
-├── app.py                    # Streamlit interface
-├── main.py                   # CLI entrypoint
-├── requirements.txt
-└── src/
-    ├── state.py               # shared pipeline state schema
-    ├── graph.py                # LangGraph wiring
-    └── nodes/
-        ├── planner.py           # topic → search queries
-        ├── search.py             # Tavily search + dedup
-        ├── validate_extract.py   # relevance scoring + text extraction
-        └── synthesizer.py        # final report generation
-
 ## Running Locally
 
 git clone https://github.com/amrita2008/MultiMind.git
