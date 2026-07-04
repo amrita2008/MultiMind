@@ -34,18 +34,16 @@ Each stage has error handling with graceful fallbacks — a blocked fetch or a m
 - **Hugging Face Spaces** — deployment
 
 ## Project Structure
-multi-mind/
-├── app.py                    # Streamlit interface
-├── main.py                   # CLI entrypoint
-├── requirements.txt
-└── src/
-├── state.py               # shared pipeline state schema
-├── graph.py                # LangGraph wiring
-└── nodes/
-├── planner.py           # topic → search queries
-├── search.py             # Tavily search + dedup
-├── validate_extract.py   # relevance scoring + text extraction
-└── synthesizer.py        # final report generation
+
+- **app.py** — Streamlit interface
+- **main.py** — CLI entrypoint
+- **requirements.txt** — dependencies
+- **src/state.py** — shared pipeline state schema
+- **src/graph.py** — LangGraph wiring
+- **src/nodes/planner.py** — topic → search queries
+- **src/nodes/search.py** — Tavily search + dedup
+- **src/nodes/validate_extract.py** — relevance scoring + text extraction
+- **src/nodes/synthesizer.py** — final report generation
 
 ## Running Locally
 
@@ -59,6 +57,7 @@ pip install -r requirements.txt
 
 Create a `.env` file in the project root:
 GEMINI_API_KEY=your_gemini_key
+
 TAVILY_API_KEY=your_tavily_key
 
 Run the CLI:
