@@ -34,14 +34,19 @@ Each stage has error handling with graceful fallbacks — a blocked fetch or a m
 ## Running Locally
 
 git clone https://github.com/amrita2008/MultiMind.git
+
 cd MultiMind
+
 python -m venv venv
+
 source venv/bin/activate      # venv\Scripts\activate on Windows
+
 pip install -r requirements.txt
 
 Create a .env file in the project root:
 
 GEMINI_API_KEY=your_gemini_key
+
 TAVILY_API_KEY=your_tavily_key
 
 Run the CLI:
