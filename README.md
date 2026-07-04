@@ -3,13 +3,15 @@
 A multi-agent AI research pipeline that autonomously plans search queries, gathers and validates sources, and synthesizes a fully cited research report — built with LangGraph and Gemini Flash.
 
 **🚀 Live demo:** https://huggingface.co/spaces/amrita24/MultiMind
+**💻 GitHub repo:** https://github.com/amrita2008/MultiMind
+
 ---
 
 ## Overview
 
 Give Multi-Mind a topic, and it runs a 4-stage agent pipeline to produce a structured, cited Markdown report — no manual searching, reading, or note-taking required.
 
-Topic → Planner → Search → Validate & Extract → Synthesizer → Report
+**Topic → Planner → Search → Validate & Extract → Synthesizer → Report**
 
 ## How It Works
 
@@ -18,7 +20,7 @@ Topic → Planner → Search → Validate & Extract → Synthesizer → Report
 | **Planner** | Breaks the topic into 4–6 targeted search queries covering different angles — background, recent developments, data/statistics, expert opinions |
 | **Search** | Runs each query through the Tavily search API, deduplicates results by URL |
 | **Validate & Extract** | Scores every source's relevance to the topic in a single batched Gemini call, then extracts full text from sources above the relevance threshold (HTML via BeautifulSoup, PDFs via PyMuPDF) |
-| **Synthesizer** | Writes a structured Markdown report grouped by sub-theme, with inline [n] citations and a numbered source list |
+| **Synthesizer** | Writes a structured Markdown report grouped by sub-theme, with inline `[n]` citations and a numbered source list |
 
 Each stage has error handling with graceful fallbacks — a blocked fetch or a malformed model response gets logged and skipped rather than crashing the whole run.
 
@@ -31,31 +33,45 @@ Each stage has error handling with graceful fallbacks — a blocked fetch or a m
 - **Streamlit** — interactive front-end
 - **Hugging Face Spaces** — deployment
 
+## Project Structure
+multi-mind/
+├── app.py                    # Streamlit interface
+├── main.py                   # CLI entrypoint
+├── requirements.txt
+└── src/
+├── state.py               # shared pipeline state schema
+├── graph.py                # LangGraph wiring
+└── nodes/
+├── planner.py           # topic → search queries
+├── search.py             # Tavily search + dedup
+├── validate_extract.py   # relevance scoring + text extraction
+└── synthesizer.py        # final report generation
+
 ## Running Locally
 
+```bash
 git clone https://github.com/amrita2008/MultiMind.git
-
 cd MultiMind
-
 python -m venv venv
-
 source venv/bin/activate      # venv\Scripts\activate on Windows
-
 pip install -r requirements.txt
+```
 
-Create a .env file in the project root:
-
+Create a `.env` file in the project root:
 GEMINI_API_KEY=your_gemini_key
-
 TAVILY_API_KEY=your_tavily_key
 
 Run the CLI:
 
+```bash
 python main.py "your research topic"
+```
 
 Or run the Streamlit app:
 
+```bash
 streamlit run app.py
+```
 
 ## Design Notes
 
